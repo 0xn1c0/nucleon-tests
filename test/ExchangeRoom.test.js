@@ -929,7 +929,7 @@ describe("Exchangeroom", async function () {
           
         await exchangeroom.connect(accounts[0])._setBridge(accounts[1].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
-
+        await exchangeroom.userSummary(accounts[0].address)
 
         await expect (exchangeroom.CFX_exchange_XCFX({value : parseEther(`10`)})).to.not.be.reverted;
         await expect (exchangeroom.CFX_exchange_XCFX({value : parseEther(`1000`)})).to.not.be.reverted;

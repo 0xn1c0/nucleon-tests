@@ -67,14 +67,14 @@ library VotePowerQueue {
     return total;
   }
 
-  function sumEndedVotes(InOutQueue storage q) internal view returns (uint256) {
-    uint256 total = 0;
-    for (uint256 i = q.start; i < q.end; i++) {
-      if (q.items[i].endBlock > block.number) {
-        break;
-      }
-      total += q.items[i].votePower;
-    }
-    return total;
-  }
+  // function sumEndedVotes(InOutQueue storage q) internal view returns (uint256) {
+  //   uint256 total = 0;
+  //   for (uint256 i = q.start; i < q.end; i++) {
+  //     if (q.items[i].endBlock > block.number) {
+  //       break;
+  //     }
+  //     total += q.items[i].votePower;
+  //   }
+  //   return total;
+  // }
 }
