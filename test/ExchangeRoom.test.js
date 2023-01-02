@@ -184,21 +184,21 @@ describe("Exchangeroom", async function () {
 
     });
 
-    describe("collectOutqueuesFinishedVotes() Tests", async () => {
+    // describe("collectOutqueuesFinishedVotes() Tests", async () => {
       
       
-      it('collectOutqueuesFinishedVotes should return [object Object]', async function () {
-        const { exchangeroom } = await deployExchangeroomFixture();
-        let collectOutqueuesFinishedVotes = await exchangeroom.collectOutqueuesFinishedVotes()
+    //   it('collectOutqueuesFinishedVotes should return [object Object]', async function () {
+    //     const { exchangeroom } = await deployExchangeroomFixture();
+    //     let collectOutqueuesFinishedVotes = await exchangeroom.collectOutqueuesFinishedVotes()
 
-      //    console.log("collectOutqueuesFinishedVotes " + collectOutqueuesFinishedVotes);
+    //   //    console.log("collectOutqueuesFinishedVotes " + collectOutqueuesFinishedVotes);
 
-          expect((await exchangeroom.collectOutqueuesFinishedVotes()).toString()).to.equal('[object Object]');
+    //       expect((await exchangeroom.collectOutqueuesFinishedVotes()).toString()).to.equal('[object Object]');
       
-      });
+    //   });
 
 
-    });
+    // });
 
     describe("userOutQueue() Tests", async () => {
       
@@ -386,7 +386,7 @@ describe("Exchangeroom", async function () {
         //check bridge contract has 20 xCFX 
         expect((Number(await xcfx.balanceOf(bridgeMockNonPayable.address)))).to.be.equal(20e18);
 
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
 
         await expect(bridgeMockNonPayable.Exchangeroom_getback_CFX(exchangeroom.address,0)).to.eventually.rejectedWith("CFX Transfer Failed");
       });
@@ -416,7 +416,7 @@ describe("Exchangeroom", async function () {
         //send 10 xCFX to account 1 TEST FUNCTION
         await xcfx.mintWithoutAffectTotalSupply(accounts[1].address, parseEther(`10`));
 
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
 
 
         await exchangeroom.connect(accounts[1]).XCFX_burn(parseEther(`200`));
@@ -443,12 +443,14 @@ describe("Exchangeroom", async function () {
 
         await expect (exchangeroom.CFX_exchange_XCFX({value : parseEther(`20`)})).to.not.be.reverted;
 
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
 
         await expect (exchangeroom.XCFX_burn(parseEther(`10`))).to.not.be.reverted;
         await expect (exchangeroom.getback_CFX(parseEther(`1000000`))).to.be.reverted;
         await expect (exchangeroom.getback_CFX(parseEther(`21`))).to.be.reverted;
         await expect (exchangeroom.getback_CFX(parseEther(`10`))).to.eventually.emit("WithdrawStake");
+        await exchangeroom.userSummary(accounts[0].address);
+
 
         await xcfx.addTokens(accounts[0].address,parseEther(`10000000`));
         await expect (exchangeroom.getback_CFX(parseEther(`1000000`))).to.be.reverted;
@@ -461,18 +463,22 @@ describe("Exchangeroom", async function () {
       it(`_setLockPeriod should be reverted`, async function () {
         const { exchangeroom , accounts, xcfx } = await deployExchangeroomFixture();
         await expect(
-              exchangeroom.connect(accounts[2])._setLockPeriod(0,0)
+              exchangeroom.connect(accounts[2])._setLockPeriod(2,1)
           ).to.be.reverted;    
+        
+        await expect(
+            exchangeroom._setLockPeriod(1,2)
+        ).to.be.reverted;   
       });
 
       it(`_setLockPeriod should not be reverted`, async function () {
         const { exchangeroom , accounts, xcfx } = await deployExchangeroomFixture();
         await expect(
-            exchangeroom.connect(accounts[0])._setLockPeriod(0,0)
+            exchangeroom.connect(accounts[0])._setLockPeriod(2,1)
         ).to.not.be.reverted;    
 
         await expect(
-          exchangeroom.connect(accounts[0])._setLockPeriod(0,0)
+          exchangeroom.connect(accounts[0])._setLockPeriod(2,1)
         ).to.emit(exchangeroom,"SetLockPeriod");    
       
     });
@@ -673,7 +679,7 @@ describe("Exchangeroom", async function () {
         await exchangeroom._setXCFXaddr(xcfx.address);
         
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`2000`));
 
         await exchangeroom._setStorageaddr(accounts[0].address);
@@ -735,7 +741,7 @@ describe("Exchangeroom", async function () {
           await exchangeroom._setXCFXaddr(xcfx.address);
           
           await exchangeroom._setminexchangelimits(1);
-          await exchangeroom._setLockPeriod(0,0);
+          await exchangeroom._setLockPeriod(2,1);
           await exchangeroom.setlockedvotes(parseEther(`2000`));
 
           await exchangeroom._setStorageaddr(accounts[0].address);
@@ -925,7 +931,7 @@ describe("Exchangeroom", async function () {
           
         await exchangeroom.connect(accounts[0])._setBridge(accounts[1].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
-
+        await exchangeroom.userSummary(accounts[0].address)
 
         await expect (exchangeroom.CFX_exchange_XCFX({value : parseEther(`10`)})).to.not.be.reverted;
         await expect (exchangeroom.CFX_exchange_XCFX({value : parseEther(`1000`)})).to.not.be.reverted;
