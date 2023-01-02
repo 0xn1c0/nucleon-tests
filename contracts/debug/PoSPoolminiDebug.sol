@@ -43,4 +43,8 @@ contract PoSPoolminiDebug is PoSPoolmini {
   function _posRegisterRetire(uint64 votePower) internal override {
     POS_REGISTER.retire(votePower);
   }
+
+  
+
+
 }

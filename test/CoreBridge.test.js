@@ -555,7 +555,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -622,7 +622,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -721,7 +721,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -799,7 +799,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -876,7 +876,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -956,7 +956,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
@@ -1041,7 +1041,7 @@ describe("CoreBridge", async function () {
         await exchangeroom.connect(accounts[0])._setBridge(accounts[0].address);
         await exchangeroom._setXCFXaddr(xcfx.address);
         await exchangeroom._setminexchangelimits(1);
-        await exchangeroom._setLockPeriod(0,0);
+        await exchangeroom._setLockPeriod(2,1);
         await exchangeroom.setlockedvotes(parseEther(`1000`));
         await exchangeroom._setStorageaddr(accounts[0].address);
         await exchangeroom._setstorageBridge(accounts[0].address);
