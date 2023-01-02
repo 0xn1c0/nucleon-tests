@@ -449,6 +449,8 @@ describe("Exchangeroom", async function () {
         await expect (exchangeroom.getback_CFX(parseEther(`1000000`))).to.be.reverted;
         await expect (exchangeroom.getback_CFX(parseEther(`21`))).to.be.reverted;
         await expect (exchangeroom.getback_CFX(parseEther(`10`))).to.eventually.emit("WithdrawStake");
+        await exchangeroom.userSummary(accounts[0].address);
+
 
         await xcfx.addTokens(accounts[0].address,parseEther(`10000000`));
         await expect (exchangeroom.getback_CFX(parseEther(`1000000`))).to.be.reverted;
